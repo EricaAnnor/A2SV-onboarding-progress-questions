@@ -1,0 +1,15 @@
+import math
+class Solution(object):
+    def percentageLetter(self, s, letter):
+        """
+        :type s: str
+        :type letter: str
+        :rtype: int
+        """
+        num = s.count(letter)
+
+        if num == 0: 
+            return 0
+        else:
+            ans = (num/len(s))*100
+            return math.floor(ans)
