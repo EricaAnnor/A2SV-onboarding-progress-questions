@@ -1,0 +1,11 @@
+if __name__ == '__main__':
+    n = int(input())
+    arr = list(map(int, input().split()))
+    maxi = max(arr)
+    lists =[]
+    for x in arr:
+        if x < maxi:
+            lists.append(x)
+    
+    runner_up = max(lists)
+    print(runner_up)
