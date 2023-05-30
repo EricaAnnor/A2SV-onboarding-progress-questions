@@ -1,0 +1,8 @@
+def divide_even():
+    kilo = int(input("Weight of watermelon: "))
+    if kilo % 2 == 0:
+        print("YES")
+    else:
+        print("NO")
+        
+divide_even()
