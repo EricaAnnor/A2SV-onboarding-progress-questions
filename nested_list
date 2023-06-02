@@ -1,0 +1,29 @@
+if __name__ == '__main__':
+    num = int(input())
+    names = []
+    scores = []
+    for _ in range(num):
+        name = input()
+        names.append(name)
+        score = float(input())
+        scores.append(score)
+        
+        
+    lists = [[x, y] for x, y in zip(names, scores)]
+
+    res_scores = []
+    for i in range(len(lists)):
+        res_scores.append(lists[i][1])
+    
+    mini = min(res_scores)
+    removed = [x for x in res_scores if x != mini]
+    
+    second = min(removed)
+    final =  []
+    
+    for y in range(len(lists)):
+        if lists[y][1] == second:
+            final.append(lists[y][0])
+    final.sort()
+    ans = '\n'.join(final)
+    print(ans)
