@@ -1,0 +1,16 @@
+from collections import Counter
+class Solution(object):
+    def majorityElement(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        result = []
+        n = len(nums)
+        my_count = Counter(nums)
+
+        for i in my_count:
+            if my_count[i] > n/3:
+                result.append(i)
+
+        return result
