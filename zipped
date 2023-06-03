@@ -1,0 +1,15 @@
+num_sub = list(map(int, input().split()))
+scores = [list(map(float, input().split())) for _ in range(num_sub[1])]
+ave_list = []
+
+std = list(zip(*scores))
+for x in range(num_sub[0]):
+    ave_list.append(sum(std[x]))
+averages = []
+for i in range(len(ave_list)):
+    averages.append(ave_list[i] / num_sub[1])
+
+rounded = [round(num, 1) for num in averages]
+
+final = '\n'.join(map(str, rounded))
+print(final)
