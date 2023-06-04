@@ -1,0 +1,9 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+english = int(input())
+eng_roll = set(map(int,input().split()))
+french = int(input())
+fre_roll = set(map(int,input().split()))
+
+new = eng_roll.difference(fre_roll)
+print(len(new))
