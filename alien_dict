@@ -1,0 +1,16 @@
+class Solution(object):
+    def isAlienSorted(self, words, order):
+        """
+        :type words: List[str]
+        :type order: str
+        :rtype: bool
+        """
+        def word_order(word):
+            return [order.index(char) for char in word]
+
+        new = sorted(words, key=word_order)
+
+        if new == words:
+            return True
+        else:
+            return False
