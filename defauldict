@@ -1,0 +1,17 @@
+# Enter your code here. Read input from STDIN. Print output to STDOUT
+from collections import defaultdict 
+num = list(map(int,input().split()))
+
+group_A = [input()for _ in range(num[0])]
+group_B = [input() for _ in range(num[1])]
+
+indexes = defaultdict(list)
+
+for i,word in enumerate(group_A):
+    indexes[word].append(i+1)
+
+for word in group_B:
+    if word in indexes:
+        print(" ".join(str(inde)for inde in indexes[word]))
+    else:
+        print("-1")
