@@ -1,0 +1,12 @@
+parent = set(input().split())
+num = int(input())
+children = [set(input().split()) for _ in range(num)]
+
+ans = True 
+
+for i in range(num):
+    if not children[i].issubset(parent):  
+        ans = False  
+        break  
+
+print(ans)
