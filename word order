@@ -1,0 +1,13 @@
+from collections import Counter
+
+num = int(input())
+words = [input() for _ in range(num)]
+
+count = Counter(words)
+
+print(len(count))
+
+lists = []
+for value in count.values():
+    lists.append(str(value))
+print(' '.join(lists))
