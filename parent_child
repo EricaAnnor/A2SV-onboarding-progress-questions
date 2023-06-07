@@ -10,3 +10,18 @@ for i in range(num):
         break  
 
 print(ans)
+'''
+parent = set(input().split())
+
+num = int(input())
+
+children = [set(input().split()) for _ in range(num)]
+
+for i in range(num):
+    if all(child in parent for child in children[i]) and len(children[i]) < len(parent):
+        ans = True
+    else:
+        ans = False
+print(ans)
+'''
+
