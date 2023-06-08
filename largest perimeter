@@ -1,0 +1,21 @@
+class Solution(object):
+    def largestPerimeter(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: int
+        """
+
+        lists = []
+
+        sorts = sorted(nums)
+        for i in range(len(nums) - 2):
+            if (sorts[i] + sorts[i+1] > sorts[i+2]):
+                lists.append(sorts[i:i+3])
+        sums = []
+        for i in range(len(lists)):
+            sums.append(sum(lists[i]))
+
+        if not sums:  
+            return 0
+        else:
+            return max(sums)
