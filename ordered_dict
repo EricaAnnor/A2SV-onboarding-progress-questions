@@ -1,0 +1,18 @@
+from collections import OrderedDict
+
+num = int(input())
+
+my_dict = OrderedDict()
+
+for _ in range(num):
+    items = input().split()
+    item_name = " ".join(items[:-1]) 
+    price = int(items[-1])
+
+    if item_name not in my_dict:
+        my_dict[item_name] = price
+    else:
+        my_dict[item_name] += price
+
+for key, name in my_dict.items():
+    print(key, name)
