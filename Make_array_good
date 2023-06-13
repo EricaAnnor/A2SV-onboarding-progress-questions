@@ -1,0 +1,16 @@
+t = int(input())
+ 
+def nearest_even(x):
+    cur = 1
+    while cur <= x:
+        cur *= 2
+    return cur
+ 
+ 
+ 
+for _ in range(t):
+    p = int(input())
+    tests = list(map(int,input().split()))
+    print(p)
+    for i in range(p):
+        print(i+1, nearest_even(tests[i]) - tests[i]) 
