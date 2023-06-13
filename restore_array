@@ -1,0 +1,16 @@
+from collections import deque
+ 
+num = int(input())
+for _ in range(num):
+    num2 = int(input())
+    results = deque()  
+    tests = list(map(int, input().split()))
+ 
+    for i in range(num2 - 2):  
+        mini = min(tests[i], tests[i + 1])
+        results.append(mini)
+ 
+    if num2 > 0:
+        results.appendleft(tests[0])  
+        results.append(tests[-1]) 
+        print(*results)
