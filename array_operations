@@ -1,0 +1,17 @@
+class Solution(object):
+    def applyOperations(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        for x in range(len(nums)-1):
+            if nums[x] == nums[x + 1]:
+                nums[x] *= 2
+                nums[x+1] = 0
+        zeros = []
+        for y in range(len(nums)-1, -1, -1):
+            if nums[y] == 0:
+                zeros.append(nums[y])
+                nums.pop(y)
+        nums.extend(zeros)
+        return nums
