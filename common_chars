@@ -1,0 +1,16 @@
+class Solution(object):
+    def commonChars(self, words):
+        """
+        :type words: List[str]
+        :rtype: List[str]
+        """
+       
+
+        counter = Counter(words[0])
+        for word in words[1:]:
+            counter &= Counter(word)
+        result = []
+        for char, count in counter.items():
+            result.extend([char] * count)
+        return result
+
