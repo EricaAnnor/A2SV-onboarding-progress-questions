@@ -1,0 +1,16 @@
+class Solution(object):
+    def multiply(self, num1, num2):
+        """
+        :type num1: str
+        :type num2: str
+        :rtype: str
+        """
+        result = []
+        new2 = num2[::-1]
+
+        for x in range(len(new2)):
+            res = int(new2[x]) * int(num1) * (10 ** x)
+            result.append(res)
+
+        
+        return str(sum(result))
