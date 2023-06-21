@@ -1,0 +1,21 @@
+class Solution(object):
+    def maxSum(self, grid):
+        """
+        :type grid: List[List[int]]
+        :rtype: int
+        result = []
+        for x in range(len(grid)):
+            summ = 0
+            summ += sum(grid[0]) + sum(grid[-1]) + grid[len(grid)//2][(len(grid[0])-1)//2]
+            return summ
+        """
+        result = []
+        for y in range(len(grid)-2):
+            for x in range(len(grid[0])-2):
+                summ = 0
+                summ += sum(grid[y][x:x+3]) + grid[y+1][x+1] + sum(grid[y+2][x:x+3])
+                result.append(summ)
+        return max(result)
+
+            
+               
