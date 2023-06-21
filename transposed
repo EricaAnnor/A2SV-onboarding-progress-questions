@@ -1,0 +1,15 @@
+class Solution(object):
+    def transpose(self, matrix):
+        """
+        :type matrix: List[List[int]]
+        :rtype: List[List[int]]
+        """
+        rows = len(matrix)
+        cols = len(matrix[0]) if rows > 0 else 0
+
+        transposed = [[0 for _ in range(rows)] for _ in range(cols)]
+        for x in range(rows):
+            for y in range(cols):
+                transposed[y][x] = matrix[x][y]
+
+        return transposed
