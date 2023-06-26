@@ -1,0 +1,55 @@
+from collections import Counter
+
+class Solution(object):
+    def isValidSudoku(self, board):
+        """
+        :type board: List[List[str]]
+        :rtype: bool
+        """
+
+        def rowTrue(board):
+            for x in range(len(board)):
+                not_empty = []
+                for y in range(len(board[0])):
+                    if board[x][y] != '.':
+                        not_empty.append(board[x][y])
+                count = Counter(not_empty)
+                for cot in count.values():
+                    if cot > 1:
+                        return False
+            return True
+
+        def colTrue(board):
+            for x in range(len(board[0])):
+                not_empty = []
+                for y in range(len(board)):
+                    if board[y][x] != '.':
+                        not_empty.append(board[y][x])
+                count = Counter(not_empty)
+                for cot in count.values():
+                    if cot > 1:
+                        return False
+            return True
+
+        def three(board):
+            sub_box = []
+            for x in range(0, len(board), 3):
+                for y in range(0, len(board[0]), 3):
+                    sub_box += board[x][y:y+3]
+                    sub_box += board[x+1][y:y+3]
+                    sub_box += board[x+2][y:y+3]
+
+            count = Counter(sub_box)
+            for cot in count.values():
+                if cot > 1:
+                    return False
+            return True
+
+        if not rowTrue(board) or not colTrue(board) or not three(board):
+            return False
+        return True
+
+           """
+          timecomplexity: O(N^2)
+          spacecomplecity:O(1)
+          """
