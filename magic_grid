@@ -1,0 +1,45 @@
+from collections import Counter
+
+class Solution(object):
+    def numMagicSquaresInside(self, grid):
+        def check_distinct(sub_grid):
+            seen = set()
+
+            for row in sub_grid:
+                for element in row:
+                    if element in seen or element not in range(1,10):
+                        return False
+                    seen.add(element)
+
+            return True
+
+        def magic(sub_grid):
+            row = [sum(x) for x in sub_grid]
+            col = [sum(y) for y in zip(*sub_grid)]
+            main = sub_grid[0][0] + sub_grid[1][1] + sub_grid[2][2]
+            diagonal = sub_grid[0][2] + sub_grid[1][1] + sub_grid[2][0]
+
+            all_sums = row + col + [main, diagonal]
+
+            count = Counter(all_sums)
+
+            if len(count) == 1:
+                return True
+            else:
+                return False
+
+        big = []
+        for x in range(len(grid)-2):
+            for y in range(len(grid[0])-2):
+                sub = []
+                sub.append(grid[x][y:y+3])
+                sub.append(grid[x+1][y:y+3])
+                sub.append(grid[x+2][y:y+3])
+                big.append(sub)
+
+        num = 0
+        for sub in big:
+            if magic(sub) and check_distinct(sub) :
+                num += 1
+
+        return num
