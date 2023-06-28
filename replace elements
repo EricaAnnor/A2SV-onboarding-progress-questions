@@ -1,0 +1,13 @@
+class Solution(object):
+    def replaceElements(self, arr):
+        """
+        :type arr: List[int]
+        :rtype: List[int]
+        """
+        for x in range(len(arr)):
+            maxi = max(arr[x:])
+            arr[x] = maxi
+        arr.append(-1)
+        overall = max(arr)
+        arr.remove(overall)
+        return arr
