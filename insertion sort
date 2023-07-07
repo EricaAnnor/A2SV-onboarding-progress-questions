@@ -1,0 +1,28 @@
+import math
+import os
+import random
+import re
+import sys
+
+def insertionSort1(n, arr):
+    # Write your code here
+    last = arr[-1]
+    target = len(arr) - 2
+
+    while target >= 0 and arr[target] > last:
+        arr[target + 1] = arr[target]
+        print(*arr)
+        target -= 1
+
+    if target == -1:
+        arr[0] = last
+    else:
+        arr[target + 1] = last
+
+    print(*arr)
+
+if __name__ == '__main__':
+    n = int(input().strip())
+    arr = list(map(int, input().rstrip().split()))
+
+    insertionSort1(n, arr)
