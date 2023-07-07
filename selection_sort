@@ -1,0 +1,17 @@
+class Solution:
+    def select(self, arr, i):
+        # code here
+        # This method is not used in the given code, so you can leave it as is or implement its functionality if needed.
+        pass
+    
+    def selectionSort(self, arr, n):
+        size = len(arr)
+        for x in range(size):
+            min_index = x
+            for y in range(x + 1, size):
+                if arr[y] < arr[min_index]:
+                    min_index = y
+
+            arr[x], arr[min_index] = arr[min_index], arr[x]
+
+        return arr
