@@ -1,0 +1,21 @@
+num = int(input())
+
+for _ in range(num):
+    t = int(input())
+    report = list(map(int,input().split()))
+
+    maxi = max(report) + 1
+    result = [0] * maxi
+
+    for x in report:
+        result[x] += 1
+    for y in range(len(result)-1):
+        if result[y] < result[y+1]:
+            print("NO")
+            break
+        
+    else:
+        print("YES")
+
+
+
