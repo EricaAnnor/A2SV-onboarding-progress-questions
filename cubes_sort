@@ -1,0 +1,12 @@
+num = int(input())
+
+for _ in range(num):
+    t = int(input())
+    test = list(map(int,input().split()))
+
+    for x in range(1,len(test)):
+        if test[x] >= test[x-1]:
+            print("YES")
+            break
+    else:
+        print("NO")
