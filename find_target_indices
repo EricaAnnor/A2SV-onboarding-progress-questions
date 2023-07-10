@@ -1,0 +1,17 @@
+class Solution(object):
+    def targetIndices(self, nums, target):
+        """
+        :type nums: List[int]
+        :type target: int
+        :rtype: List[int]
+        """
+        final = sorted(nums)
+        lists = []
+
+        for x in range(len(final)):
+            if final[x] == target:
+                lists.append(x)
+
+        lists.sort()  
+        return lists
+er
