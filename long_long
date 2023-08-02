@@ -1,0 +1,23 @@
+
+t = int(input())
+ 
+for _ in range(t):
+    n = int(input())
+    arr = list(map(int, input().split()))
+ 
+    max_sum = sum(abs(num) for num in arr)
+    neg_count = 0
+    neg_sequence_count = 0
+    is_in_sequence = False
+ 
+    for num in arr:
+        if num < 0:
+            neg_count += 1
+            if not is_in_sequence:
+                neg_sequence_count += 1
+                is_in_sequence = True
+        elif num > 0:
+            is_in_sequence = False
+ 
+ 
+    print(max_sum, neg_sequence_count)
