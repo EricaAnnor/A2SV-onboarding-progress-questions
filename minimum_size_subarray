@@ -1,0 +1,23 @@
+class Solution(object):
+    def minSubArrayLen(self, target, nums):
+        """
+        :type target: int
+        :type nums: List[int]
+        :rtype: int
+        """
+        left = 0
+        right = 0
+        mini = float("inf") 
+        curr = 0
+
+        while right < len(nums):
+            curr += nums[right]
+
+            while curr >= target:
+                mini = min(mini, right - left + 1)
+                curr -= nums[left]
+                left += 1
+
+            right += 1
+
+        return mini if mini != float("inf") else 0
