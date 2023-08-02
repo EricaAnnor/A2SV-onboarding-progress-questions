@@ -1,0 +1,25 @@
+t = int(input())
+ 
+for _ in range(t):
+    n,c = list(map(str, input().split()))
+    sequence = list(input())
+    sequence += sequence
+    flag = False
+    maximum = 0
+    count = 0
+ 
+    for x in range(len(sequence)):
+        if sequence[x] == c:
+            flag = True
+            
+            
+        if sequence[x] == "g":
+            flag = False
+            
+            maximum = max(count,maximum)
+            count = 0
+ 
+        if flag: 
+            count += 1        
+ 
+    print(maximum)
