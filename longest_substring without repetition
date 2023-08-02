@@ -1,0 +1,22 @@
+class Solution(object):
+    def lengthOfLongestSubstring(self, s):
+        """
+        :type s: str
+        :rtype: int
+        """
+
+        left = 0
+        right = 0
+        longest = float('-inf')
+        visited = {}
+
+        while right < len(s):
+            if s[right] not in visited:
+                visited[s[right]] = right
+                longest = max(longest, len(visited))
+                right += 1
+            else:
+                del visited[s[left]]
+                left += 1
+
+        return max(longest, 0)
