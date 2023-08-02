@@ -1,0 +1,18 @@
+
+t = int(input())
+ 
+for x in range(t):
+    num = int(input())
+    lists = list(map(int, input().split()))
+    lists.sort()
+ 
+    i = 0
+    maxi = 0
+    new_max = 0
+ 
+    while i < num // 2:
+        new_max += lists[num - i - 1] - lists[i]
+        maxi = max(maxi, new_max)
+        i += 1
+ 
+    print(maxi)
