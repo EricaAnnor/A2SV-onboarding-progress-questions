@@ -1,0 +1,19 @@
+t = int(input()) 
+ 
+for _ in range(t):
+    n = int(input())  
+    b = list(map(int, input().split())) 
+    
+    left = 0
+    right = n - 1
+    result = []
+    
+    while left <= right:
+        result.append(b[left])
+        left += 1
+        
+        if left <= right:
+            result.append(b[right])
+            right -= 1
+    
+    print(*result)
