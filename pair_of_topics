@@ -1,0 +1,23 @@
+
+t = int(input())
+num1 = list(map(int, input().split()))
+num2 = list(map(int,input().split()))
+ 
+diff = [0] * t  
+ 
+for x in range(t):
+    diff[x] = num1[x] - num2[x]
+ 
+diff.sort()
+ 
+ 
+first = 0
+last = t - 1
+result = 0
+ 
+while last >= first:
+    while first < last and diff[first] + diff[last] <= 0:
+        first += 1
+    result += max(0,last-first)
+    last -= 1
+print(result)
