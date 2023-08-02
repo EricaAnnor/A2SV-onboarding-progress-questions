@@ -1,0 +1,19 @@
+class Solution(object):
+    def findMaxAverage(self, nums, k):
+        left = 0
+        right = 0
+        max_ave = float('-inf')  # Initialize max_ave to negative infinity
+        window_sum = 0
+
+        while right < len(nums):
+            window_sum += nums[right]
+
+            if right - left + 1 == k:
+                window_ave = window_sum / k
+                max_ave = max(max_ave, window_ave)
+                window_sum -= nums[left]  # Remove the leftmost element from the window sum
+                left += 1  # Slide the window to the right
+
+            right += 1
+
+        return max_ave
