@@ -1,0 +1,11 @@
+t = int(input())
+ 
+for _ in range(t):
+    first = list(map(int, input().split()))
+    last = list(map(int, input().split()))
+    first += last
+ 
+    if first.index(max(first)) + first.index(min(first)) == 3:
+        print("YES")
+    else:
+        print("NO")
