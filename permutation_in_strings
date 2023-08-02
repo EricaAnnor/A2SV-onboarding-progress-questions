@@ -1,0 +1,33 @@
+class Solution(object):
+    def checkInclusion(self, s1, s2):
+        """
+        :type s1: str
+        :type s2: str
+        :rtype: bool
+        """
+
+        visited = {}
+        target = {}
+        len_t = len(s1)
+
+        for char in s1:
+            target[char] = target.get(char, 0) + 1
+
+        left = 0
+        right = 0
+
+        while right < len(s2):
+            visited[s2[right]] = visited.get(s2[right], 0) + 1
+
+            if right - left + 1 == len_t:
+                if visited == target:
+                    return True
+
+                visited[s2[left]] -= 1
+                if visited[s2[left]] == 0:
+                    del visited[s2[left]]
+
+                left += 1
+            right += 1
+
+        return False
