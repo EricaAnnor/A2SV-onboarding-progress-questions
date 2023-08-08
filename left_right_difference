@@ -1,0 +1,24 @@
+class Solution(object):
+    def leftRightDifference(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[int]
+        """
+        left_accum = [0] * len(nums)
+        right_accum = [0] * len(nums)
+        result = [0] * len(nums)
+
+        left_sum = 0
+        for x in range(len(nums)):
+            left_accum[x] = left_sum
+            left_sum += nums[x]
+        
+        right_sum = 0
+        for y in range(len(nums) - 1, -1, -1):
+            right_accum[y] = right_sum
+            right_sum += nums[y]
+
+        for z in range(len(left_accum)):
+            result[z] = abs(left_accum[z] - right_accum[z])
+
+        return result
