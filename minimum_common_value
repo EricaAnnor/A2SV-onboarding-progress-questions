@@ -1,0 +1,24 @@
+class Solution(object):
+    def getCommon(self, nums1, nums2):
+        """
+        :type nums1: List[int]
+        :type nums2: List[int]
+        :rtype: int
+        """
+        mini = float('inf')
+
+        first, second = 0, 0
+
+        while first < len(nums1) and second < len(nums2):
+            if nums1[first] == nums2[second]:
+                mini = min(mini, nums1[first])  
+                first += 1
+                second += 1
+            elif nums1[first] < nums2[second]:
+                first += 1
+            else:
+                second += 1
+
+        if mini == float('inf'):
+            return -1
+        return mini
