@@ -1,0 +1,31 @@
+class Solution(object):
+    def maximumSubarraySum(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        left = 0
+        right = 0
+        max_sum = 0
+        current_sum = 0
+        unique = set()
+
+        while right < len(nums):
+            while nums[right] in unique:
+                unique.remove(nums[left])
+                current_sum -= nums[left]
+                left += 1
+
+            current_sum += nums[right]
+            unique.add(nums[right])
+
+            if right - left + 1 == k:
+                max_sum = max(current_sum, max_sum)
+                unique.remove(nums[left])
+                current_sum -= nums[left]
+                left += 1
+
+            right += 1
+
+        return max_sum
