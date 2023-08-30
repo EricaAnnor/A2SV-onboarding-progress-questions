@@ -1,0 +1,25 @@
+class Solution(object):
+    def subarraySum(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+        left = 0
+        right = 0
+        count = 0
+        summ = 0
+
+        while right < len(nums):
+            summ += nums[right]
+            
+            while summ > k:
+                summ -= nums[left]
+                left += 1
+                
+            if summ == k or summ == 0:  
+                count += 1
+                
+            right += 1
+
+        return count
