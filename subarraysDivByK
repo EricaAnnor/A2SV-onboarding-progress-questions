@@ -1,0 +1,28 @@
+class Solution(object):
+    def subarraysDivByK(self, nums, k):
+        """
+        :type nums: List[int]
+        :type k: int
+        :rtype: int
+        """
+
+        count = 0
+        prefix = [0]
+        hashmap = defaultdict(int)
+
+        for x in range(len(nums)):
+            if x == 0:
+                prefix.append(nums[0])
+            else:
+                prefix.append(prefix[-1] + nums[x])
+
+        print(prefix)
+        
+        for x in prefix:
+            ans = x % k
+            count += hashmap[ans]
+            hashmap[ans] += 1
+
+        return count
+       
+       
