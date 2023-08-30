@@ -1,0 +1,24 @@
+class NumArray:
+
+    def __init__(self, nums: List[int]):
+        self.pref_sum = [0] * len(nums)
+
+        for x in range(len(nums)):
+            if x == 0:
+                self.pref_sum[x] = nums[x]
+            else:
+                self.pref_sum[x] = self.pref_sum[x-1] + nums[x]
+        
+        
+
+    def sumRange(self, left: int, right: int) -> int:
+        rightsum = self.pref_sum[right]
+        left_sum = self.pref_sum[left-1] if left > 0 else 0
+
+        return rightsum - left_sum
+        
+
+
+# Your NumArray object will be instantiated and called as such:
+# obj = NumArray(nums)
+# param_1 = obj.sumRange(left,right)
