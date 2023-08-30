@@ -1,0 +1,22 @@
+import string
+
+class Solution(object):
+    def shiftingLetters(self, s, shifts):
+        result = []
+
+        alphabets = string.ascii_lowercase
+
+        suffix = []
+        accum = 0
+
+        for x in range(len(shifts)-1, -1, -1):
+            accum += shifts[x]
+            suffix.append(accum)
+        
+        suffix.reverse()
+
+        for x in range(len(s)):
+            shifted_index = (suffix[x] + alphabets.index(s[x])) % 26
+            result.append(alphabets[shifted_index])
+        
+        return ''.join(result)
