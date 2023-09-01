@@ -1,0 +1,60 @@
+class Node:
+    def __init__(self, val):
+        self.val = val
+        self.next = None
+
+class MyLinkedList(object):
+    def __init__(self):
+        self.dummy = Node(0)
+        self.head = self.dummy.next
+
+    def get(self, index):
+        curr = self.dummy
+        i = -1
+
+        while curr and i != index:
+            curr = curr.next
+            i += 1
+
+        if curr:
+            return curr.val
+        else:
+            return -1
+
+    def addAtHead(self, val):
+        new_node = Node(val)
+        new_node.next = self.dummy.next
+        self.dummy.next = new_node
+
+    def addAtTail(self, val):
+        new_node = Node(val)
+        pointer = self.dummy
+
+        while pointer.next:
+            pointer = pointer.next
+        if pointer:
+            pointer.next = new_node
+
+    def addAtIndex(self, index, val):
+        new_node = Node(val)
+        pointer = self.dummy
+        i = 0
+
+        while pointer and i < index:
+            pointer = pointer.next
+            i += 1
+        if pointer:
+            new_node.next = pointer.next
+            pointer.next = new_node
+
+    def deleteAtIndex(self, index):
+        pointer = self.dummy
+        i = 0
+
+        while pointer.next and i < index:
+            pointer = pointer.next
+            i += 1
+
+        if pointer.next:
+            pointer.next = pointer.next.next
+    
