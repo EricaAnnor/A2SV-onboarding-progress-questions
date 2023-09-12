@@ -1,0 +1,69 @@
+class ListNode:
+    def __init__(self,val):
+        self.val = val
+        self.next = None
+
+
+class MyStack(object):
+
+    def __init__(self):
+        self.dummy = ListNode(0)
+
+        
+
+    def push(self, x):
+        """
+        :type x: int
+        :rtype: None
+        """
+        new_node = ListNode(x)
+        new_node.next = self.dummy.next
+        self.dummy.next = new_node
+    def pop(self):
+        """
+        :rtype: int
+        """
+        pointer = self.dummy
+
+        # while pointer.next:
+        #     prev = pointer
+        #     pointer = pointer.next
+        
+        # result = pointer
+        # prev.next = prev.next.next
+        # return result.val
+        result = pointer.next
+        pointer.next = pointer.next.next
+        return result.val
+        
+
+    def top(self):
+        """
+        :rtype: int
+        """
+        pointer = self.dummy
+
+        # while pointer.next:
+        #     pointer = pointer.next
+        
+        # return pointer.val
+        return pointer.next.val
+        
+
+    def empty(self):
+        """
+        :rtype: bool
+        """
+        if self.dummy.next == None:
+            return True
+        else:
+            return False
+        
+
+
+# Your MyStack object will be instantiated and called as such:
+# obj = MyStack()
+# obj.push(x)
+# param_2 = obj.pop()
+# param_3 = obj.top()
+# param_4 = obj.empty()
