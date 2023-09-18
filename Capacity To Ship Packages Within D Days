@@ -1,0 +1,29 @@
+class Solution:
+    def shipWithinDays(self, weights: List[int], days: int) -> int:
+
+        def summ(target):
+            ships = 0
+            left = 0
+            i = 0
+            while i < len(weights):
+                j = i
+                curr = 0
+                while j < len(weights) and (curr + weights[j]) <= target:
+                    curr += weights[j]
+                    j += 1
+                
+                ships += 1
+                i = j
+            return ships <= days
+
+        left = max(weights)
+        right = sum(weights)      
+        while left <= right:
+            mid = (left + right)//2
+            if summ(mid):
+                right = mid - 1
+            else:
+                left = mid + 1
+        return left
+
+        
