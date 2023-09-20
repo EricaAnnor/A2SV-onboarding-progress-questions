@@ -1,0 +1,16 @@
+class Solution:
+    def reverseString(self, s: List[str]) -> None:
+        """
+        Do not return anything, modify s in-place instead.
+        """
+        def rever(n):
+            N = len(s) - 1
+            if n == (len(s)//2):
+                return s
+            s[n],s[N-n] = s[N-n],s[n]
+            return rever(n+1)
+        return rever(0)
+
+
+        
+        
