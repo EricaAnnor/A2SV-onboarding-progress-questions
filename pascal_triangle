@@ -1,0 +1,23 @@
+class Solution:
+    def getRow(self, rowIndex: int) -> List[int]:
+        # def row(arr,index: int):
+        #     array = [1]
+        #     if index == rowIndex:
+        #         return arr
+        #     else:
+        #         for i in range(len(arr)-1):
+        #             array.append(arr[i] + arr[i+1])
+        #         array.append(1)
+
+        #         return row(array,index + 1)
+        # return row([1],0)
+        if rowIndex == 0:
+            return [1]
+        
+        prev = self.getRow(rowIndex - 1)
+        new = [1]
+
+        for i in range(len(prev)-1):
+            new.append(prev[i] + prev[i+1])
+        new.append(1)
+        return new
