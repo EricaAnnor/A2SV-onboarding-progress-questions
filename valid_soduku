@@ -1,0 +1,30 @@
+class Solution:
+    def isValidSudoku(self, board: List[List[str]]) -> bool:
+       
+
+        for x in range(9):
+            row = set()
+            col = set()
+            for y in range(9):
+                if board[x][y] != '.':
+                    if board[x][y] in row:
+                        return False
+                    row.add(board[x][y])
+                if board[y][x] != '.':
+                    if board[y][x] in col:
+                        return False
+                    col.add(board[y][x])
+        
+        # the three subset
+
+        for a in range(0,9,3):
+            for b in range(0,9,3):
+                three = set()
+                for c in range(3):
+                    for d in range(3):
+                        if board[a+c][b+d] != '.':
+                            if board[a+c][b+d] in three:
+                                return False
+                            three.add(board[a+c][b+d])
+        
+        return True
