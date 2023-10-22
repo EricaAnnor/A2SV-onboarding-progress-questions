@@ -1,0 +1,13 @@
+n = int(input())
+nums = list(map(int,input().split()))
+
+nums.sort()
+
+pref = [1]
+
+for x in range(n):
+    if nums[x] <= pref[-1]:
+        pref.append(nums[x] + pref[-1])
+    else:
+        break
+print(pref[-1])
