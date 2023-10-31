@@ -1,0 +1,40 @@
+class Solution:
+    def splitString(self, s: str) -> bool:
+        solutions = []
+
+        def is_valid_state(state):
+            return state[1] == len(s)
+        
+        def get_candidates(state):
+            candidates = []
+            left = state[1]
+            right = state[1]
+
+            while right < len(s):
+                right += 1
+                if state[0] == inf:
+                    candidates.append((int(s[left:right]),right))
+
+                elif int(s[left:right]) < state[0] and ((state[0]) - int(s[left:right])) == 1:
+                    candidates.append((int(s[left:right]) ,right))
+            
+            if state[0] == inf:
+                candidates.pop()
+            return candidates
+        
+        def search(state):
+
+            if is_valid_state(state):
+                solutions.append(state)
+                return
+            
+            for candidate in get_candidates(state):
+                search(candidate)
+        
+        
+        initial_state = (inf, 0)
+        search(initial_state)
+        if len(solutions) != 0:
+            return True
+        else:
+            return False
