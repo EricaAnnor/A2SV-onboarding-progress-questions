@@ -1,0 +1,36 @@
+class Solution:
+    def isPossible(self, nums: List[int]) -> bool:
+        heap = []
+        heappush(heap, (nums[0],1))
+
+        for i in range(1,len(nums)):
+            
+            if not heap:
+                heappush(heap,(nums[i],1))
+
+          
+            while heap and heap[0][0] < nums[i] - 1:
+                less = heappop(heap)
+
+                if less[1] < 3:
+                    return False
+
+            if heap and  heap[0][0] == nums[i] - 1:
+                val,lent = heappop(heap)
+                heappush(heap,(nums[i],lent+1))
+                   
+            else:
+                heappush(heap,(nums[i],1))
+        
+        print(heap)
+
+        check = True
+
+        for x in range(len(heap)):
+            if heap[x][1] < 3:
+                check = False
+                break
+
+        return check
+
+
