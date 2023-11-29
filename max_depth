@@ -1,0 +1,23 @@
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val=None, children=None):
+        self.val = val
+        self.children = children
+"""
+
+class Solution:
+    def maxDepth(self, root: 'Node') -> int:
+        
+        def dfs(node:'Node',ans):
+            if not node:
+                return ans
+            
+            max_ans = ans + 1
+
+            if node.children:
+                for child in node.children:
+                    max_ans = max(max_ans,dfs(child,ans+1))
+            return max_ans
+        return dfs(root,0)
+        
