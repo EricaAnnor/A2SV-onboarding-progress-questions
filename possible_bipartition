@@ -1,0 +1,33 @@
+from collections import defaultdict
+
+class Solution:
+    def possibleBipartition(self, n: int, dislikes: List[List[int]]) -> bool:
+        result = True
+        graph = defaultdict(list)
+
+        for x in dislikes:
+            graph[x[0]].append(x[1])
+            graph[x[1]].append(x[0])
+
+        color = [-1] * (n+1)
+
+        def dfs(vertex, graph):
+            for neighbour in graph[vertex]:
+                if color[neighbour] == -1:
+                    if color[vertex] == 0:
+
+                        color[neighbour] = 1
+                    else:
+                        color[neighbour] = 0
+                    if not dfs(neighbour, graph):
+                        return False
+                elif color[neighbour] == color[vertex]:
+                    return False
+            return True
+
+        for i in range(1, n+1):
+            if color[i] == -1:
+                color[i] = 0
+                result = result and dfs(i, graph)
+        
+        return result
