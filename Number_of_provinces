@@ -1,0 +1,27 @@
+class Solution:
+    def findCircleNum(self, isConnected: List[List[int]]) -> int:
+        graph = defaultdict(list)
+        for x in range(len(isConnected)):
+            graph[x] = []
+            for y in range(len(isConnected[0])):
+                if isConnected[x][y] == 1 and x != y:
+                    graph[x].append(y)
+
+        def dfs(vertex,visited):
+            if vertex in visited:
+                return 
+            visited.add(vertex)
+
+            for neighbour in graph[vertex]:
+                if neighbour not in visited:
+                    dfs(neighbour,visited)
+
+        count = 0
+        visited = set() 
+
+        for x in graph:
+            if x not in visited:
+                count += 1
+                dfs(x,visited)
+
+        return count 
