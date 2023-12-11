@@ -1,0 +1,21 @@
+class Solution(object):
+    def pancakeSort(self, arr):
+        """
+        :type arr: List[int]
+        :rtype: List[int]
+        """
+        if arr == sorted(arr):
+            return []
+
+        final = []
+        for x in range(len(arr), 1, -1):
+            idx = arr.index(x)
+            if idx != x - 1:
+                if idx != 0:
+                    arr = arr[:idx+1][::-1] + arr[idx+1:]
+                    final.append(idx+1)
+                
+                arr = arr[:x][::-1] + arr[x:]
+                final.append(x)
+        
+        return final
