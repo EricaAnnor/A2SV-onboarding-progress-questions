@@ -1,0 +1,32 @@
+class Solution:
+    def updateMatrix(self, mat: List[List[int]]) -> List[List[int]]:
+        queue = deque()
+        visited = set()
+
+        for x in range(len(mat)):
+            for y in range(len(mat[0])):
+                if mat[x][y] == 0:
+                    queue.append((x,y))
+                else:
+                    mat[x][y] = float(inf)
+        
+        def inbound(x,y):
+            return (0 <= x < len(mat) and 0 <= y < len(mat[0]))
+        
+        neighbours = [(0,1),(0,-1),(1,0),(-1,0)]
+
+        while queue:
+            row,col = queue.popleft()
+
+            for x,y in neighbours:
+                n_row = row + x
+                n_col = col + y
+
+                if inbound(n_row,n_col) and (n_row,n_col) not in visited and (mat[row][col] < mat[n_row][n_col]):
+                    mat[n_row][n_col] = mat[row][col] + 1
+                    queue.append((n_row,n_col))
+        return mat
+            
+
+        
+       
