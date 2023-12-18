@@ -1,0 +1,28 @@
+from collections import deque
+
+class Solution:
+    def racecar(self, target: int) -> int:
+        queue = deque([(0, 1, 0)]) 
+        visited = set()
+        visited.add((0, 1))
+
+        while queue:
+            bound = len(queue)
+            for _ in range(bound):
+                pos, spd, lev = queue.popleft()
+              
+                if pos == target:
+                    return lev
+
+                rev_spd = -1 if spd > 0 else 1
+                if (pos, rev_spd) not in visited:
+                    visited.add((pos, rev_spd))
+                    queue.append((pos, rev_spd, lev + 1))
+
+                new_pos = pos + spd
+                new_spd = spd * 2
+                if (new_pos, new_spd) not in visited:
+                    visited.add((new_pos, new_spd))
+                    queue.append((new_pos, new_spd, lev + 1))
+
+        return -1
