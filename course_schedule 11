@@ -1,0 +1,37 @@
+class Solution:
+    def findOrder(self, numCourses: int, mat: List[List[int]]) -> List[int]:
+        res = {course: 0 for course in range(numCourses)}
+        graph = defaultdict(list)
+
+        for x in mat:
+            if x[0] not in graph:
+                graph[x[0]] = []
+
+            graph[x[1]].append(x[0])
+            
+        for x in graph:
+            for y in graph[x]:
+                res[y] += 1
+        
+        sort = []
+        ans = []
+
+        queue = deque()
+        for y in res:
+            if res[y] == 0:
+                queue.append(y)
+
+        while queue:
+            
+            node = queue.popleft()
+            sort.append(node)
+
+            for x in graph[node]:
+                res[x] -= 1
+                if res[x] == 0:
+                    queue.append(x)
+        
+        if len(sort) != numCourses:
+            return []
+        return sort
+
