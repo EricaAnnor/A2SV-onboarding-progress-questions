@@ -1,0 +1,32 @@
+class Solution:
+    def eventualSafeNodes(self, mat: List[List[int]]) -> List[int]:
+        res = {node:0 for node in range(len(mat))}
+
+        graph = defaultdict(list)
+
+        for x in range(len(mat)):
+          
+            for y in mat[x]:
+                graph[y].append(x)
+                res[x] += 1
+
+        queue = deque([])
+        ans = []
+        for x in res:
+            if res[x] == 0:
+                queue.append(x)
+        
+
+        while queue:
+            node = queue.popleft()
+            ans.append(node)
+
+            for y in graph[node]:
+                res[y] -= 1
+                if res[y] == 0:
+                    queue.append(y)
+
+
+        ans.sort()
+        return ans
+
