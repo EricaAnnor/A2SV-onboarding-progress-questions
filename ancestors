@@ -1,0 +1,37 @@
+class Solution:
+    def getAncestors(self, n: int, edges: List[List[int]]) -> List[List[int]]:
+        graph = defaultdict(list)
+        res = {org:0 for org in range(n)}
+        for edge in edges:
+            res[edge[1]] += 1
+            graph[edge[0]].append(edge[1])
+        for x in range(n):
+            if x not in graph:
+                graph[x] = []
+        print(graph)
+        print(res)
+
+        queue = deque([])
+
+        for x in res:
+            if res[x] == 0:
+                queue.append(x)
+        
+        ans = [[] for _ in range(n)]
+
+        while queue:
+            node = queue.popleft()
+
+            for x in graph[node]:
+                res[x] -= 1
+                if ans[node] != []:
+                    ans[x].extend(ans[node])
+                ans[x].append(node)
+                ans[x] = sorted(list(set(ans[x])))
+                if res[x] == 0:
+                    queue.append(x)
+        
+        
+        return ans
+
+
