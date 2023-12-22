@@ -1,0 +1,41 @@
+class Solution:
+    def findAllRecipes(self, recipes: List[str], ingredients: List[List[str]], supplies: List[str]) -> List[str]:
+        res = {recipe: 0 for recipe in recipes}
+        graph = defaultdict(list)
+
+        for x in range(len(recipes)):
+            graph[recipes[x]] = ingredients[x]
+            
+        graph2 = defaultdict(list)
+
+        for x in range(len(recipes)):
+            for y in range(len(ingredients)):
+                if recipes[x] in ingredients[y]:
+
+                    graph2[recipes[x]].append(recipes[y])
+                    res[recipes[y]] += 1
+
+        
+        print(graph2)
+        print(res)
+        queue = deque([])
+        for recipe in graph:
+            check = True
+            for ing in graph[recipe]:
+                if ing not in supplies:
+                    check = False
+                    break
+            if check == True:
+                queue.append(recipe)
+        print(queue)
+        ans = []
+        while queue:
+            node = queue.popleft()
+            ans.append(node)
+
+            for ing in graph2[node]:
+                res[ing] -= 1
+                if res[ing] == 0:
+                    queue.append(ing)
+              
+        return ans
