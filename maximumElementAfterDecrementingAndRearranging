@@ -1,0 +1,16 @@
+class Solution:
+    def maximumElementAfterDecrementingAndRearranging(self, arr: List[int]) -> int:
+        arr.sort()
+        print(arr)
+
+        for x in range(len(arr)):
+            if x == 0 and arr[x] != 1:
+                arr[x] = 1
+            
+            if x > 0 and abs(arr[x] - arr[x-1]) > 1:
+                new = arr[x-1] + 1
+                arr[x] = new
+        print(arr)
+        return max(arr)
+                
+        
