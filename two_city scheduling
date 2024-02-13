@@ -1,0 +1,25 @@
+class Solution:
+    def twoCitySchedCost(self, costs: List[List[int]]) -> int:
+        n_cost = sorted(costs,reverse = True, key=lambda x: abs(x[0] - x[1]))
+        a_c = 0
+        b_c = 0
+        res = 0
+        check = len(costs) // 2
+        for a,b in n_cost:
+            if a < b:
+                if a_c < check:
+                    res += a
+                    a_c += 1
+                else: 
+                    res += b
+                    b_c += 1
+            else:
+                if b_c < check:
+                    res += b
+                    b_c += 1
+                else:
+                    res += a
+                    a_c += 1
+                
+
+        return res
