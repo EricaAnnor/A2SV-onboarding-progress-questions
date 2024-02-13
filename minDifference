@@ -1,0 +1,16 @@
+class Solution:
+    def minDifference(self, nums: List[int]) -> int:
+        if len(nums) <= 4:
+            return 0
+        nums.sort()
+        res = []
+        left = 0
+        right = len(nums) - 4
+
+        for i in range(right,len(nums)):
+            x = nums[i]-nums[i-right]
+            res.append(x)
+
+           
+        return min(res)
+        
