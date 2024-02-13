@@ -1,0 +1,23 @@
+class Solution:
+    def lemonadeChange(self, bills: List[int]) -> bool:
+        check = defaultdict(int)
+        check = {5:0,10:0,20:0}
+        for x in bills:
+            if x == 5:
+                check[5] += 1
+            if x == 10:
+                check[10] += 1
+                if check[5] == 0:
+                    return False
+                check[5] -= 1
+            if x == 20:
+                check[20] += 1
+                if check[5] > 0 and check[10] > 0:
+                    check[5] -= 1
+                    check[10] -= 1
+                elif check[5] >= 3:
+                    check[5] -= 3
+                else:
+                    return False
+        return True
+        
