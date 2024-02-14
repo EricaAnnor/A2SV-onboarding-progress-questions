@@ -1,0 +1,17 @@
+class Solution:
+    def maxSatisfaction(self, nums: List[int]) -> int:
+        nums.sort(reverse = True)
+        summ = 0
+        previous = []
+        for x in range(len(nums)):
+            previous.append(nums[x])
+            cur = 0
+            check = previous[::-1]
+            for x in range(len(check)):
+                cur += ((x+1) * check[x])
+            if cur < summ:
+                previous.pop()
+            else:
+                summ = cur
+
+        return summ
