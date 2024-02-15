@@ -1,12 +1,26 @@
 class Solution:
-    def findComplement(self, num: int) -> int:
-        n_n = bin(num)
+    def findComplement(self, i: int) -> int:
         ans = ''
-        for x in n_n[2:]:
+
+        n= ''
+        while i > 0:
+            if i & 1 == 1:
+                n += '1'
+            else:
+                n += '0'
+            i >>= 1
+        n_n = n[::-1]
+        print(n_n)
+        
+        for x in n_n:
             if x == '1':
                 ans += '0'
             else:
                 ans += '1'
+        res = 0
+        n_m = ans[::-1]
+        for x in range(len(n_m)):
+            res += (int(n_m[x]) * 2**x)
 
-        return int(ans,2)
+        return res
         
