@@ -1,0 +1,25 @@
+class Solution:
+    def getMaximumGenerated(self, n: int) -> int:
+        hashmap = defaultdict(int)
+
+        def helper(n):
+            if n == 0:
+            
+                return 0
+            if n == 1:
+                return 1
+            
+            if n not in hashmap:
+                if n % 2 == 0:
+                    hashmap[n] = helper(n//2)
+                else:
+                    hashmap[n] = helper(n//2) + helper((n//2) + 1)
+            return hashmap[n]
+        
+        max_num = 0
+
+        for x in range(n+1):
+            max_num = max(max_num,helper(x))
+        return max_num
+
+        
