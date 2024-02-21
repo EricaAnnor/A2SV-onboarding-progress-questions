@@ -1,0 +1,21 @@
+class Solution:
+    def coinChange(self, coins: List[int], amount: int) -> int:
+        hashmap = defaultdict(int)
+        def helper(amt):
+            if amt == 0:
+                return 0
+
+            if amt < 0:
+                return float('inf')
+            if amt not in hashmap:
+                mini = float('inf')
+                for x in coins:
+                    mini = min(mini, 1 + helper(amt-x))
+                
+                hashmap[amt] = mini
+            
+            return hashmap[amt]
+
+        if helper(amount) == float("inf"):
+            return -1
+        return helper(amount)
