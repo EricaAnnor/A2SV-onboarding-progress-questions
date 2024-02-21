@@ -1,0 +1,16 @@
+class Solution:
+    def minCostClimbingStairs(self, cost: List[int]) -> int:
+        hashmap = defaultdict(int)
+        def helper(i):
+            if i >= len(cost):
+                return 0
+
+            if i not in hashmap:
+                hashmap[i] =  cost[i]+min(helper(i+1) ,helper(i+2))
+            
+            return hashmap[i]
+        
+        return min(helper(0),helper(1))
+                
+            
+        
