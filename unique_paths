@@ -1,0 +1,17 @@
+class Solution:
+    def uniquePaths(self, m: int, n: int) -> int:
+        
+        hashmap = defaultdict(int)
+        def helper(r,c):
+            if r >= m or r < 0 or c >= n or c < 0:
+                return 0
+            if r == m-1 and c == n-1:
+                return 1
+
+            x = (r,c)
+            if x not in hashmap:
+                hashmap[x] = helper(r+1,c) + helper(r,c+1)
+            return hashmap[x]
+        
+        return helper(0,0)
+        
