@@ -1,0 +1,27 @@
+class Solution:
+    def rob(self, nums: List[int]) -> int:
+        if len(nums) == 1:
+            return nums[0]
+        hashmap1 = defaultdict(int)
+        hashmap2 = defaultdict(int)
+
+        f_half = nums[1:]
+        s_half = nums[:-1]
+
+        def helper(i, half, hashmap):
+            # if i == len(half)-1:
+            #     return half[-1]
+
+            # if i == len(half)-2:
+            #     return max(half[-1],half[-2])
+
+            if i >= len(half):
+                return 0
+
+            if i not in hashmap:
+                hashmap[i] = max( helper(i+1, half, hashmap) ,(half[i] + helper(i+2,half,hashmap)))
+            
+            return hashmap[i]
+        
+        return max(helper(0,f_half,hashmap1), helper(0,s_half,hashmap2))
+        
