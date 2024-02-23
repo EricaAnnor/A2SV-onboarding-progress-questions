@@ -1,0 +1,24 @@
+n = int(input())
+
+for i in range(n):
+    nu = int(input())
+
+    bini = bin(nu)[2:]
+    binary = bini.zfill(32)
+    num = ["0"] * len(binary)
+    if binary.count('1') == 1:
+        one = binary.rfind('1')
+        zero = binary.rfind('0')
+        num[one] = '1'
+        num[zero] = '1'
+    else:
+        one = binary.rfind('1')
+        num[one] = '1'
+    
+    ans = ''.join(num)
+    print(int(ans,2))
+
+
+        
+
+        
