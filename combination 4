@@ -1,0 +1,21 @@
+#top-down approach
+class Solution:
+    def combinationSum4(self, nums: List[int], target: int) -> int:
+        hashmap = defaultdict(int)
+
+        def helper(num):
+
+            if num == target:
+                return 1
+            if num > target:
+                return 0
+
+            if num not in hashmap:
+                for x in self.nums:
+                    hashmap[num] += helper(x+num)
+            return hashmap[num]
+        self.nums = nums
+        return helper(0)
+
+  
+        
