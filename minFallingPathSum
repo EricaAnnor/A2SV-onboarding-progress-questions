@@ -1,0 +1,28 @@
+from typing import List
+from collections import defaultdict
+
+class Solution:
+    def minFallingPathSum(self, matrix: List[List[int]]) -> int:
+        if not matrix:
+            return 0
+        
+        hashmap = defaultdict(int)
+
+        def helper(r, c):
+            if r >= len(matrix) or c < 0 or c >= len(matrix[0]):
+                return float('inf')
+            
+            if r == len(matrix) - 1:
+                return matrix[r][c]
+
+            if (r, c) not in hashmap:
+                hashmap[(r, c)] = matrix[r][c] + min(helper(r+1, c-1), helper(r+1, c), helper(r+1, c+1))
+            return hashmap[(r, c)]
+
+        mini = float('inf')
+        for x in range(len(matrix[0])):
+            mini = min(mini, helper(0, x))
+
+        return mini
+
+
