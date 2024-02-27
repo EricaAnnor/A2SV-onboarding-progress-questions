@@ -1,0 +1,17 @@
+class Solution:
+    def longestSubsequence(self, arr: List[int], k: int) -> int:
+        hashmap = defaultdict(int)
+
+        for x in range(len(arr)):
+
+            cur = arr[x] - k
+            if cur in hashmap:
+                if arr[x] not in hashmap:
+                    hashmap[arr[x]] = hashmap[cur] + 1
+                else:
+                    hashmap[arr[x]] = max(hashmap[arr[x]],hashmap[cur] + 1)
+            else:
+                hashmap[arr[x]] = 1
+           
+        
+        return max(hashmap.values())
