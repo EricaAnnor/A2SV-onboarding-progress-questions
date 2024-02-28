@@ -1,0 +1,26 @@
+class Solution: 
+    def maxProfit(self, prices: List[int], fee: int) -> int:
+        hashmap = defaultdict(int)
+
+        def helper(i, flag):
+            if i >= len(prices):
+                return 0
+            
+            if (i, flag) not in hashmap:
+                if flag:
+                    #if we buy we can either decide to buy at next index or sell at next index
+                    sell_next = helper(i + 1, False)- prices[i]-fee
+                
+                    buy_next = helper(i+1, True)
+                else:
+
+                    sell_next = helper(i+1, True) + prices[i]
+                    buy_next = helper(i + 1, False)
+                
+                
+                hashmap[(i, flag)] = max(buy_next, sell_next)
+                
+            return hashmap[(i, flag)]
+
+        max_profit = helper(0, True)
+        return max_profit
