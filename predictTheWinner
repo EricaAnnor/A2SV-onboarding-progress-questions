@@ -1,0 +1,20 @@
+class Solution:
+    def predictTheWinner(self, nums: List[int]) -> bool:
+        hashmap = defaultdict(int)
+
+        def dp(left,right,flag):
+            if left > right:
+                return 0
+
+            x = (left,right,flag)
+            if x not in hashmap:
+                if flag == True:
+                    hashmap[x] = max(dp(left+1,right,False) + nums[left], dp(left,right-1,False)+nums[right])
+                else:
+                    hashmap[x] = min(dp(left+1,right,True) - nums[left],dp(left,right-1,True)-nums[right])
+            return hashmap[x]
+
+        if dp(0,len(nums)-1,True) >= 0:
+            return True
+        else:
+            return False
