@@ -1,0 +1,53 @@
+    class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.is_end = False
+
+
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+
+    def insert(self,arr):
+        cur = self.root
+        # arr = bin(num)[2:].zfill(31)
+
+        for x in arr:
+            if x not in cur.children:
+                cur.children[x] = TrieNode()
+            cur = cur.children[x]
+        cur.is_end = True
+
+
+class Solution:
+    def findMaximumXOR(self, nums: List[int]) -> int:
+        trie = Trie()
+        mx = 0
+        maxi = max(nums).bit_length()
+        for num in nums:
+            x = '0'*(maxi - len(bin(num)[2:])) + bin(num)[2:]
+            trie.insert(x)
+                   
+        for num in nums:
+            s = '0'*(maxi - len(bin(num)[2:])) + bin(num)[2:]
+            suf = ''
+            cur = trie.root 
+            
+            for x in s:
+                c = str(1-int(x))
+                if c in cur.children:               
+                    suf += c
+                    cur = cur.children[c]
+                else:
+                    suf += x
+                    cur = cur.children[x]
+                
+
+            n = int(suf,2)
+            check = num ^ n
+            mx = max(mx,check)
+        return mx
+            
+        
+
+        
