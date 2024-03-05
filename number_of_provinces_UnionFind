@@ -1,0 +1,40 @@
+class UnionFind:
+    def __init__(self,size):
+        self.parent = [i for i in range(size)]
+        self.sixe = [1] * size
+    
+    def find(self,node):
+        if node == self.parent[node]:
+            return node
+        idx = self.find(self.parent[node])
+        return idx
+
+    def union(self,x,y):
+        parent_x = self.find(x)
+        parent_y = self.find(y)
+
+        if parent_x != parent_y:
+            if self.sixe[parent_x]  > self.sixe[parent_y]:
+                self.parent[parent_y] = parent_x
+                self.sixe[parent_x] += self.sixe[parent_y]
+            else:
+                self.parent[parent_x] = parent_y
+                self.sixe[parent_y] += self.sixe[parent_x] 
+
+
+
+class Solution:
+    def findCircleNum(self, isConnected: List[List[int]]) -> int:
+        unionFind = UnionFind(len(isConnected))
+        
+        for x in range(len(isConnected)):
+            for y in range(len(isConnected[0])):
+                if isConnected[x][y] == 1:
+                    unionFind.union(x,y)
+        
+        ans = set()
+        for x in unionFind.parent:
+            ans.add(unionFind.find(x))
+        print(ans)
+        return len(ans)
+        
