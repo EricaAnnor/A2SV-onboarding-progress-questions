@@ -1,0 +1,37 @@
+class UnionFind:
+    def __init__(self,size):
+        self.parent = [i for i in range(size)]
+        self.sixe = [1] * size
+    
+    def find(self,node):
+        if node == self.parent[node]:
+            return node
+        idx = self.find(self.parent[node])
+        return idx
+
+    def union(self,x,y):
+        parent_x = self.find(x)
+        parent_y = self.find(y)
+
+        if parent_x != parent_y:
+            if self.sixe[parent_x]  > self.sixe[parent_y]:
+                self.parent[parent_y] = parent_x
+                self.sixe[parent_x] += self.sixe[parent_y]
+            else:
+                self.parent[parent_x] = parent_y
+                self.sixe[parent_y] += self.sixe[parent_x] 
+
+
+class Solution:
+    def validPath(self, n: int, edges: List[List[int]], source: int, destination: int) -> bool:
+      
+        unionFind = UnionFind(n)
+
+        for u,v in edges:
+            unionFind.union(u,v)
+      
+        
+        if unionFind.find(source) == unionFind.find(destination):
+            return True
+        else:
+            False
