@@ -1,0 +1,63 @@
+class UnionFind:
+    def __init__(self,account):
+        self.parent = {}
+       
+        for x in account:
+            for y in range(1,len(x)):
+                self.parent[x[y]] = x[y]
+                      
+
+        self.sixe = defaultdict(int)
+        for x in account:
+            for y in range(1,len(x)):
+                self.sixe[x[y]] += 1    
+    def find(self,node):
+        if node == self.parent[node]:
+            return node
+        idx = self.find(self.parent[node])
+        return idx
+
+    def union(self,x,y):
+        parent_x = self.find(x)
+        parent_y = self.find(y)
+
+        if parent_x != parent_y:
+            if parent_x < parent_y:
+                self.parent[parent_y] = parent_x
+                self.sixe[parent_x] += self.sixe[parent_y]
+            else:
+                self.parent[parent_x] = parent_y
+                self.sixe[parent_y] += self.sixe[parent_x] 
+
+
+class Solution:
+    def accountsMerge(self, accounts: List[List[str]]) -> List[List[str]]:
+        unionFind = UnionFind(accounts)
+        names = {}
+        for x in accounts:
+            for y in range(1,len(x)):
+                names[x[y]] = x[0]
+
+        
+        
+        for x in accounts:
+            for y in range(2,len(x)):
+                unionFind.union(x[y-1],x[y])
+        
+        
+        ans = defaultdict(list)
+        cur = []
+        for x in unionFind.parent:
+            cur.append((x,unionFind.find(x)))
+            ans[unionFind.find(x)].append(x)
+        
+        
+        res = []
+        for x in ans:
+            cur = [names[x]]
+            ans[x].sort()
+            cur.extend(ans[x])
+            res.append(cur)
+      
+        
+        return res
