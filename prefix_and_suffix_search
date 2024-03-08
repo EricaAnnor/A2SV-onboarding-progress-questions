@@ -1,0 +1,57 @@
+class TrieNode:
+    def __init__(self):
+        self.children = {}
+        self.index = -1
+        #add a self.index to keep track of the indexes
+        
+class Trie:
+    def __init__(self):
+        self.root = TrieNode()
+
+    def possible(self,word):
+        res = []
+        for x in range(len(word)):
+            cur = word[x:] + '#' + word
+            res.append(cur)
+        return res 
+
+    def insert(self, word, i):
+        cur = self.root
+        
+        words = self.possible(word)
+        
+        for y in words:
+            for x in y:
+                if x not in cur.children:
+                    cur.children[x] = TrieNode()
+                cur = cur.children[x]
+                cur.index = i
+            cur.index = i
+            cur = self.root
+
+class WordFilter:
+
+    def __init__(self, words: List[str]):
+        self.trie = Trie()
+        for x in range(len(words)):
+            y = words[x]
+            self.trie.insert(y,x)
+        
+
+    def f(self, pref: str, suff: str) -> int:
+        cur = self.trie.root
+        word = suff + '#' + pref
+
+        for x in word:
+            if x not in cur.children:
+                return -1
+            else:
+                cur = cur.children[x]
+        return cur.index
+
+        
+
+
+# Your WordFilter object will be instantiated and called as such:
+# obj = WordFilter(words)
+# param_1 = obj.f(pref,suff)
