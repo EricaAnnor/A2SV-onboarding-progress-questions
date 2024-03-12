@@ -1,0 +1,45 @@
+class Solution:
+    def networkDelayTime(self, times: List[List[int]], n: int, k: int) -> int:
+        graph = defaultdict(list)
+        for u, v, w in times:
+            graph[u].append((w, v))
+
+        queue = [(0, k)]
+        heapify(queue)
+        visited = set()
+        while queue:
+            cost, node = heappop(queue)
+            visited.add(node)
+
+            if len(visited) == n:
+                return cost
+                
+            for c, l in graph[node]:
+                if l not in visited:
+                    heappush(queue, (c + cost, l))
+        return -1
+
+
+
+#floyd
+class Solution:
+    def networkDelayTime(self, times: List[List[int]], n: int, m: int) -> int:
+        dp = [[float('inf')] * n for _ in range(n)]
+        
+
+        for u,v,w in times:
+            dp[u-1][v-1] =  w
+
+        for x in range(len(dp)):
+            dp[x][x] = 0
+
+        for k in range(n):
+            for i in range(n):
+                for j in range(n):
+                    dp[i][j] = min(dp[i][j],(dp[i][k] + dp[k][j]))
+        
+        s = max(dp[m-1])
+        if s == float('inf'):
+            return -1
+        else:
+            return s
