@@ -1,0 +1,25 @@
+class Solution:
+    def minDistance(self, word1: str, word2: str) -> int:
+        hashmap = defaultdict(int)
+        def dp(i,j):
+            if (i,j) not in hashmap:
+            
+                if i >= len(word1) and j >= len(word2):
+                    return 0
+
+                
+                elif i >= len(word1):
+                    add = len(word2) - j
+                    hashmap[(i,j)] = add
+                elif  j >= len(word2):
+                    add = len(word1) - i
+                    hashmap[(i,j)] = add
+                            
+                elif word1[i] == word2[j]:
+                    hashmap[(i,j)] = dp(i+1,j+1)
+                else:
+                    hashmap[(i,j)] = 1 + min(dp(i+1,j),dp(i,j+1),dp(i+1,j+1))
+            return hashmap[(i,j)]
+        return dp(0,0)
+
+            
