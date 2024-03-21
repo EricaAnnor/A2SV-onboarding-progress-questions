@@ -1,0 +1,50 @@
+t = int(input())
+
+for _ in range(t):
+
+    n = int(input())
+    nums = list(map(int,input().split()))
+
+    check = 2 ** n
+    count = 0
+    ress = []
+    def fxn(x):
+        cur = 0
+        while x % 2 == 0:
+            x = x // 2
+            cur += 1
+        return cur
+    for x in range(len(nums)):
+        if x % 2 != 0:
+            ress.append(fxn(x+1))
+      
+        count += fxn(nums[x])
+    
+    need = n-count
+        
+    res = sorted(ress,reverse=True)   
+    c = 0
+    ans = 0
+    cur = 0
+    tt = 0
+    
+    if count >= n:
+        print(0)
+    
+  
+    else:
+
+        for x in res:
+            if cur >= need:
+                break        
+            cur += x
+            ans += 1 
+        if cur < need:
+            print(-1)
+        else:
+            print(ans)
+
+
+
+
+ 
