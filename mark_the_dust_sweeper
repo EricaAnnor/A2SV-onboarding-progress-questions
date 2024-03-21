@@ -1,0 +1,19 @@
+t = int(input())
+
+for _ in range(t):
+    n = int(input())
+    nums = list(map(int, input().split()))
+    if len(set(nums[:-1])) == 1 and nums[0] == 0:
+        print(0)
+    else:
+        start = 0
+        for x in range(n):
+            if nums[x] != 0:
+                start = x
+                break
+        
+        new = nums[start:-1]
+        
+        print(new.count(0) + sum(new))
+    
+
