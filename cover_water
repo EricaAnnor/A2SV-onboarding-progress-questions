@@ -1,0 +1,16 @@
+def solve():
+    n = int(input())
+    nums = input()
+
+    cur = 0
+
+    for x in range(0,len(nums)-2):
+        if nums[x] == '.' and nums[x+1] == '.' and nums[x+2] == '.':
+            return 2
+            
+    return nums.count('.')
+
+t = int(input())
+
+for _ in range(t):
+    print(solve())
