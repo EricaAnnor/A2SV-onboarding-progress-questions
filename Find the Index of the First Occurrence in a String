@@ -1,0 +1,35 @@
+class Solution:
+    def strStr(self, haystack: str, needle: str) -> int:     
+
+        def check(word):
+            cur = 0
+            n = len(word) - 1
+            for x in range(len(word)):
+                cur += ((ord(word[x]) - ord('a') + 1) * (26 **(n-x)))
+            return cur
+
+        ans = check(needle)
+
+        left = 0
+        right = left + (len(needle) -1)
+        
+        pre = check(haystack[0:len(needle)])
+        while right < len(haystack)-1:
+            
+            if pre == ans:
+                return left
+            
+            else:
+                left += 1
+                right += 1
+                pre = (26*(pre - ((ord(haystack[left-1]) - ord('a') + 1) * (26**(len(needle)-1))))) + (ord(haystack[right]) - ord('a') + 1)
+        
+        if pre == ans:
+            return left
+                
+        return -1
+            
+
+
+
+        
