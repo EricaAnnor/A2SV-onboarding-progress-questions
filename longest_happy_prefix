@@ -1,0 +1,38 @@
+class Solution:
+    def longestPrefix(self, s: str) -> str:
+        
+        # calculate the prefix and suffix hash at the same time
+        mod = 10**9 + 7
+        left = 0
+        right = len(s) - 1
+        pref = (ord(s[0]) - ord('a') + 1)%mod
+        suf = (ord(s[-1]) -ord('a') + 1)%mod
+       
+        maxi = 0
+        p = 31
+        while left < len(s)-1 and right > 0:
+            if pref == suf:
+                maxi = max(maxi,left+1)
+
+            left += 1
+            right -= 1
+            pref *= 31
+            pref += ((ord(s[left]) - ord('a')) + 1)
+            pref %= mod
+        
+            suf += ((ord(s[right]) - ord('a') + 1) * p)
+            p *= 31
+            p %= mod
+            suf %= mod
+           
+        if maxi == 0:
+            return ''
+        
+        return s[:(maxi)]
+            
+
+
+
+
+
+        
