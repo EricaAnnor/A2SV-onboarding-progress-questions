@@ -1,0 +1,36 @@
+class Solution:
+    def countPaths(self, n: int, roads: List[List[int]]) -> int:
+        graph = defaultdict(list)
+
+        for u,v,t in roads:
+            graph[u].append([v,t])
+            graph[v].append([u,t])
+        queue = [[0,0]]
+        heapify(queue)
+        visited = set()
+        count = [0]*n
+
+
+        while queue:
+            time,node = heappop(queue)
+            if node in visited:continue
+            count[node] = time
+            visited.add(node)
+            
+
+            for dest,t in graph[node]:
+                if dest not in visited:
+                    heappush(queue,[t+time,dest])
+        print(count)
+        @cache
+        def dp(node,cost):
+            if node == 0:
+                return 1
+            res = 0
+            for nei,c in graph[node]:
+                if c+cost+count[nei]<=count[n-1]:
+                    res+=dp(nei,c+cost)
+            return res
+        return dp(n-1,0)%1000000007
+
+
