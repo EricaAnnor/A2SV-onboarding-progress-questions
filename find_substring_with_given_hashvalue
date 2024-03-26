@@ -1,0 +1,32 @@
+class Solution:
+    def subStrHash(self, h: str, power: int, modulo: int, k: int, hashValue: int) -> str:
+        s = h[::-1]
+
+        def val(b):
+            return ord(b) - ord('a') + 1
+
+        cur = 0
+
+        p = 1
+        for x in range(k-1):
+            cur = (cur * power) % modulo
+            cur = (cur + val(s[x])) % modulo
+
+            p = (p * power) % modulo
+
+        left = -1
+        right = -1
+        for y in range(k-1,len(s)):
+           
+            cur = (cur*power)%modulo
+            cur = (cur + val(s[y])) % modulo
+
+            if cur == hashValue:
+                left = y-k+1
+                right = y + 1 
+                
+
+            cur = (cur - (p*val(s[y-k+1])) ) % modulo
+        if left == -1 and right == -1:
+            return ''
+        return s[left:right][::-1]
