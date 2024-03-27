@@ -1,0 +1,26 @@
+class Solution:
+    def shiftingLetters(self, s: str, shifts: List[List[int]]) -> str:
+        
+        arr = [0] * (len(s) + 2)
+
+        for x in shifts:
+            l,r,k = x[0],x[1],x[2]
+
+            if k == 1:
+                arr[l+1] += 1
+                arr[r+2] -= 1
+            else:
+                arr[l+1] -= 1
+                arr[r+2] += 1
+        
+        for y in range(1,len(arr)):
+            arr[y] = arr[y-1] + arr[y]
+
+        print(arr)
+        res = ''
+        for x in range(1,len(arr)-1):
+            cur = ((ord(s[x-1]) -ord('a'))+ arr[x])%26
+            cur = cur + ord('a')
+            
+            res += chr(cur)
+        return res
