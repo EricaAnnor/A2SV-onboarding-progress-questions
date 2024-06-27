@@ -1,0 +1,29 @@
+t = int(input())
+
+for _ in range(t):
+    n = int(input())
+    nums = list(map(int,input().split()))
+
+    ans = 0
+
+    right = 0
+    pos_max = float('-inf')
+    neg_max = float('-inf')
+
+    while right < n:
+
+        while right < n and nums[right] > 0:
+            pos_max = max(pos_max,nums[right])
+            right += 1
+        ans += pos_max if pos_max != float("-inf") else 0
+        pos_max = float('-inf')
+
+        while right < n and nums[right] < 0:
+            neg_max = max(neg_max,nums[right])
+            right += 1
+        ans += neg_max if neg_max != float("-inf") else 0
+        neg_max = float('-inf')
+
+    print(ans)
+
+
