@@ -1,0 +1,28 @@
+class Solution:
+    def commonChars(self, words: List[str]) -> List[str]:
+        res = defaultdict(int)
+
+        for x in words[0]:
+            check = True
+            for y in words:
+                ch = Counter(y)
+
+                if x in ch:
+                    if x in res and ch[x] <= res[x]:
+                        check = False
+                        break
+                if x not in y:
+                    check = False
+                    break
+
+            if check == True:
+
+                res[x] += 1
+
+        ans = []
+        for x in res:
+            ans.extend([x] * res[x])
+        return ans
+
+        
+        
