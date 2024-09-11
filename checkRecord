@@ -1,0 +1,23 @@
+class Solution:
+    def checkRecord(self, n: int) -> int:
+        MOD = 10**9 + 7
+        @lru_cache
+        def dp(i,n_A,n_L):
+
+            if n_A >= 2 or n_L >= 3:
+                return 0
+        
+            if i == n:
+                return 1
+
+           
+
+            
+            
+            ans = dp(i+1,n_A,0) + dp(i+1,n_A + 1,0) + dp(i+1,n_A,n_L + 1)
+                 
+            ans = ans % MOD 
+            return ans
+
+        
+        return dp(0,0,0)
