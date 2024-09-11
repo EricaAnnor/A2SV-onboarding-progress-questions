@@ -1,0 +1,43 @@
+class Solution:
+    def shortestPath(self, grid: List[List[int]], k: int) -> int:
+        directions = [(0,1),(1,0),(-1,0),(0,-1)]
+        def inbound(r,c):
+            return 0 <= r < len(grid) and 0 <= c < len(grid[0])
+
+        
+        if grid[0][0] == 1:
+            queue = deque([[0,0,k-1,0]])
+        else:
+            queue = deque([[0,0,k,0]])
+
+        visited = set([(0,0,k)])
+
+        while queue:
+            r,c,cur,step = queue.popleft()
+
+            if r == len(grid) -1 and c == len(grid[0]) - 1:
+                return step
+
+            
+
+            for a,b in directions:
+                n_r = r + a
+                n_c = c + b
+
+                if inbound(n_r,n_c) and (n_r,n_c,cur-1) not in visited:
+                    if grid[n_r][n_c] == 1 and cur > 0:
+                        queue.append([n_r,n_c,cur-1,step+1])
+                        visited.add((n_r,n_c,cur-1))
+                    elif grid[n_r][n_c] == 0:
+                        queue.append([n_r,n_c,cur,step+1])
+                        visited.add((n_r,n_c,cur-1))
+
+        return -1
+
+        
+                        
+
+                    
+
+
+        
